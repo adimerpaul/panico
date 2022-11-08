@@ -78,7 +78,7 @@ module.exports = configure(function (ctx) {
           .use(ESLintPlugin, [{ extensions: [ 'js', 'vue' ] }])
       },
       env:{
-        API: ctx.dev ? 'http://localhost:8000/api/' : 'https://api.example.com',
+        API: ctx.dev ? 'http://localhost:8000/api/' : 'https://bpanico.siscenter.org/api/',
         API_SOCKET: ctx.dev ? 'http://localhost:3000/' : 'https://api.example.com',
         API_FRONT: ctx.dev ? 'http://localhost:8080/' : 'https://api.example.com',
       }
@@ -168,7 +168,7 @@ module.exports = configure(function (ctx) {
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#027be3',
+        theme_color: '#2A4F66',
         icons: [
           {
             src: 'icons/icon-128x128.png',
