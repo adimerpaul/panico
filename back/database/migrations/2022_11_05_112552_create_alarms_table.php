@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('lat', 11, 6);
             $table->decimal('lng', 11, 6);
             $table->string('address');
-            $table->boolean('cancel');
+            $table->string('status')->default('Pendiente');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

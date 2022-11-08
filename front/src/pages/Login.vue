@@ -97,7 +97,7 @@ export default {
         //     this.store.user=res.data.user
         //     this.store.isLoggedIn=true
         //     this.$api.defaults.headers.common['Authorization'] = 'Bearer '+res.data.token
-        //     localStorage.setItem('tokenChat',res.data.token)
+        //     localStorage.setItem('tokenPanico',res.data.token)
         //   }).catch(err => {
         //     console.log({err:err})
         //   }).finally(() => {
@@ -119,6 +119,7 @@ export default {
         email: this.email,
         password: this.password,
       }).then(res => {
+        console.log(res.data)
         this.$q.notify({
           message: 'Bienvenido',
           color: 'positive',
@@ -129,7 +130,7 @@ export default {
         this.store.user=res.data.user
         this.store.isLoggedIn=true
         this.$api.defaults.headers.common['Authorization'] = 'Bearer '+res.data.token
-        localStorage.setItem('tokenChat',res.data.token)
+        localStorage.setItem('tokenPanico',res.data.token)
       }).catch(error => {
         console.log(error)
         this.$q.notify({

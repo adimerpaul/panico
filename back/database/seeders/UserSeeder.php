@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'phone' => '1010',
             'address' => 'admin',
             'city' => 'ORURO',
-            'type' => 'admin',
+            'type' => 'Administrador',
         ]);
     }
 }

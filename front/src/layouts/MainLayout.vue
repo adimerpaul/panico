@@ -1,21 +1,79 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="lHh Lpr lFf" class="bg-grey-2">
+    <q-header class="bg-grey-2">
       <q-toolbar>
         <q-btn
           flat
           dense
           round
+          color="primary"
           icon="menu"
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title class="text-bold text-primary">
+          <!--          <q-item v-if="store.userChat.avatar!=undefined">-->
+          <!--            <q-item-section avatar>-->
+          <!--              <q-avatar>-->
+          <!--                <img  :src="store.userChat.avatar">-->
+          <!--              </q-avatar>-->
+          <!--            </q-item-section>-->
+          <!--            <q-item-section>-->
+          <!--              <q-item-label lines="1">-->
+          <!--                {{ store.userChat.name }}-->
+          <!--              </q-item-label>-->
+          <!--              <q-item-label class="conversation__summary" caption>-->
+          <!--                En linea {{ store.userChat.fechaConexion }}-->
+          <!--              </q-item-label>-->
+          <!--            </q-item-section>-->
+          <!--          </q-item>-->
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <div class="row q-pt-xs">
+          <div class="col-8">
+            <q-input dense rounded outlined v-model="search" placeholder="Buscar">
+              <template v-slot:prepend>
+                <q-icon name="search" />
+              </template>
+            </q-input>
+          </div>
+          <div class="col-2 flex flex-center">
+            <q-btn
+              flat
+              dense
+              round
+              color="primary"
+              icon="o_notifications"
+              aria-label="Notifications">
+              <q-badge color="primary" floating transparent>
+                4
+              </q-badge>
+            </q-btn>
+          </div>
+          <div class="col-2 flex flex-center">
+            <q-btn round>
+              <q-avatar size="38px">
+                <img v-if="store.user.avatar!=undefined" :src="url+'../imagenes/'+store.user.avatar">
+              </q-avatar>
+              <q-menu>
+                <q-list style="min-width: 100px">
+                  <q-item clickable v-ripple to="datos">
+                    <q-item-section avatar>
+                      <q-icon color="primary" name="perm_contact_calendar" />
+                    </q-item-section>
+                    <q-item-section>{{store.user.name}}</q-item-section>
+                  </q-item>
+                  <q-separator />
+                  <q-item clickable v-ripple @click="logout">
+                    <q-item-section avatar>
+                      <q-icon color="primary" name="logout" />
+                    </q-item-section>
+                    <q-item-section>Salir</q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
+          </div>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -25,92 +83,139 @@
       bordered
     >
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
+        <q-item-label class="q-pa-xs">
+          <div class="row">
+            <div class="col-3 flex flex-center">
+              <!--              <q-avatar size="48px">-->
+              <q-icon color="primary" size="48px" name="o_radio_button_checked" />
+              <!--              </q-avatar>-->
+            </div>
+            <div class="col-9">
+              <div class="text-h6 text-bold " >Boton Panico</div>
+              <div class="text-caption">1.4.8</div>
+            </div>
+          </div>
         </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <q-separator />
+        <q-toolbar class="bg-primary text-white shadow-2">
+          <q-toolbar-title>Opciones</q-toolbar-title>
+        </q-toolbar>
+        <q-list bordered>
+          <q-list >
+            <q-item clickable exact to="/" active-class="bg-blue-grey-6 text-white">
+              <q-item-section avatar>
+                <q-icon name="o_radio_button_unchecked" />
+              </q-item-section>
+              <q-item-section>
+                Boton Panico
+              </q-item-section>
+            </q-item>
+            <q-item clickable exact to="datos" active-class="bg-blue-grey-6 text-white">
+              <q-item-section avatar>
+                <q-icon name="o_contact_phone" />
+              </q-item-section>
+              <q-item-section>
+                Mis datos
+              </q-item-section>
+            </q-item>
+            <q-item clickable exact to="history" active-class="bg-blue-grey-6 text-white">
+              <q-item-section avatar>
+                <q-icon name="o_history" />
+              </q-item-section>
+              <q-item-section>
+                Historial
+              </q-item-section>
+            </q-item>
+<!--            <q-item clickable exact to="credencial" active-class="bg-blue-grey-6 text-white">-->
+<!--              <q-item-section avatar>-->
+<!--                <q-icon name="o_credit_card" />-->
+<!--              </q-item-section>-->
+<!--              <q-item-section>-->
+<!--                Credenciales-->
+<!--              </q-item-section>-->
+<!--            </q-item>-->
+<!--            <q-item clickable exact to="certificado" active-class="bg-blue-grey-6 text-white">-->
+<!--              <q-item-section avatar>-->
+<!--                <q-icon name="o_verified_user" />-->
+<!--              </q-item-section>-->
+<!--              <q-item-section>-->
+<!--                Certificados-->
+<!--              </q-item-section>-->
+<!--            </q-item>-->
+<!--            <q-item clickable exact to="material" active-class="bg-blue-grey-6 text-white">-->
+<!--              <q-item-section avatar>-->
+<!--                <q-icon name="o_category" />-->
+<!--              </q-item-section>-->
+<!--              <q-item-section>-->
+<!--                Entrega material-->
+<!--              </q-item-section>-->
+<!--            </q-item>-->
+<!--            <q-item clickable exact to="refrigerio" active-class="bg-blue-grey-6 text-white">-->
+<!--              <q-item-section avatar>-->
+<!--                <q-icon name="o_restaurant_menu" />-->
+<!--              </q-item-section>-->
+<!--              <q-item-section>-->
+<!--                Refrigerio-->
+<!--              </q-item-section>-->
+<!--            </q-item>-->
+          </q-list>
+          <q-separator />
+        </q-list>
       </q-list>
     </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
+
   </q-layout>
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
-export default defineComponent({
+import {useCounterStore} from "stores/example-store";
+import {date} from "quasar";
+export default {
   name: 'MainLayout',
-
-  components: {
-    EssentialLink
-  },
-
-  setup () {
-    const leftDrawerOpen = ref(false)
-
+  data () {
     return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      loading: false,
+      url:process.env.API,
+      leftDrawerOpen: false,
+      search: '',
+      store:useCounterStore(),
+    }
+  },
+  created() {
+  },
+  methods: {
+    logout(){
+      this.$q.dialog({
+        message:'¿Quieres cerrar sesión?',
+        title:"Salir",
+        ok:{
+          push:true
+        },
+        cancel:{
+          push:true,
+          color:'negative'
+        }
+      }).onOk(()=>{
+        this.$q.loading.show()
+        this.$api.post('logout').then(res=>{
+          this.$api.defaults.headers.common['Authorization']=''
+          this.store.user={}
+          this.store.negocio={}
+          this.store.userChat={}
+          localStorage.removeItem('tokenJor')
+          this.store.isLoggedIn=false
+          this.$router.push('/login')
+          this.$q.loading.hide()
+        })
+      })
+    },
+    toggleLeftDrawer () {
+      this.leftDrawerOpen = !this.leftDrawerOpen
     }
   }
-})
+}
 </script>

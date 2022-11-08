@@ -43,10 +43,11 @@ export default boot(({ app ,router}) => {
   app.config.globalProperties.$Oauth = Oauth
   app.config.globalProperties.$api = api
   const token = localStorage.getItem('tokenPanico')
+  // console.log(token)
   if (token) {
     app.config.globalProperties.$api.defaults.headers.common['Authorization'] = 'Bearer '+token
     app.config.globalProperties.$api.post('me').then(res=>{
-      // console.log(res.data)
+      console.log(res.data)
       useCounterStore().user=res.data
       useCounterStore().isLoggedIn=true
     }).catch(err=>{

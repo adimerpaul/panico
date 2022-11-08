@@ -21,7 +21,8 @@ Route::post('login', [\App\Http\Controllers\UserController::class, 'login']);
 Route::post('register',[ \App\Http\Controllers\UserController::class, 'register']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [\App\Http\Controllers\UserController::class, 'logout']);
-    Route::get('me', [\App\Http\Controllers\UserController::class, 'me']);
+    Route::post('me', [\App\Http\Controllers\UserController::class, 'me']);
     Route::apiResource('user', \App\Http\Controllers\UserController::class);
     Route::apiResource('alarm', \App\Http\Controllers\AlarmController::class);
+    Route::post('upload', [\App\Http\Controllers\UploadController::class, 'upload']);
 });
