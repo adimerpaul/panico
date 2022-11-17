@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { io } from "socket.io-client";
-const URL = "http://localhost:3000";
+const URL = process.env.API_SOCKET;
 const socket = io(URL);
 
 export const useCounterStore = defineStore('counter', {
