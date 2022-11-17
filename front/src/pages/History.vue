@@ -59,6 +59,7 @@ export default {
       alarms: [],
       alarmColumns:[
         {name:'action', label:'Acción', field:'action', align:'left', sortable:true},
+        {name:'phone', label:'Teléfono', field:'phone', align:'left', sortable:true},
         {name:'status', label:'Estado', field:'status', align:'left', sortable:true},
         {name:'name', label:'Ciudadado', field:row=>row.user.name, align:'left', sortable:true},
         // {name:'id', label:'ID', field:'id', align:'left', sortable:true},
