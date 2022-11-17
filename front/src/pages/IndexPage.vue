@@ -10,7 +10,7 @@
         </div>
       </q-card-section>
       <q-card-section v-else class="flex-center flex">
-        <q-btn label="ALERT" @click="alertCreate" round color="red" size="100px" outline >
+        <q-btn label="PANIC" @click="alertCreate" round color="red" size="100px" >
         </q-btn>
       </q-card-section>
     </q-card>
@@ -37,7 +37,6 @@ export default {
         persistent: true
       }).onOk(() => {
         this.location()
-
       }).onCancel(() => {
         this.$q.notify({
           message: 'Alerta cancelada',
@@ -58,6 +57,7 @@ export default {
           user_id:this.store.user.id
         }).then((response) => {
           this.$q.loading.hide()
+          this.store.socket.emit("chat message","Alerta de "+this.store.user.name) //enviar mensaje a socket");
           this.$q.notify({
             message: 'Alerta enviada',
             color: 'positive',

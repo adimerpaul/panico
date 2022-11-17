@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 class AlarmController extends Controller{
     public function index(Request $request){
         if ($request->user()->type == 'Administrador') {
-            $alarms = Alarm::with('user')->get();
+            $alarms = Alarm::with('user')->orderBy('id','desc')->get();
         } else {
-            $alarms = Alarm::with('user')->where('user_id', $request->user()->id)->get();
+            $alarms = Alarm::with('user')->where('user_id', $request->user()->id)->orderBy('id','desc')->get();
         }
         return $alarms;
     }

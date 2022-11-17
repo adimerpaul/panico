@@ -1,8 +1,8 @@
 {
   "name": "front",
   "version": "0.0.1",
-  "description": "Boton de panico",
-  "productName": "Panico",
+  "description": "SEGURIDAD CIUDADANA POLICIAL",
+  "productName": "SECIPOL",
   "author": "adimerpaul <adimer101@gmail.com>",
   "private": true,
   "scripts": {
@@ -14,8 +14,11 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "json-as-xlsx": "^2.4.6",
     "pinia": "^2.0.11",
     "quasar": "^2.6.0",
+    "socket.io-client": "^4.5.3",
+    "tone": "^14.7.77",
     "universal-social-auth": "^0.2.6",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0"
